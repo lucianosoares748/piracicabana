@@ -1,0 +1,65 @@
+/* Customizações para Responsividade e Usabilidade Móvel */
+
+body {
+    background-color: #f4f6f9;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* Deixa os cartões com bordas mais suaves */
+.card {
+    border: none;
+    border-radius: 12px;
+}
+
+.card-header {
+    border-top-left-radius: 12px !important;
+    border-top-right-radius: 12px !important;
+    font-weight: 600;
+}
+
+/* Ajustes para botões grandes e fáceis de tocar no celular (Touch-friendly) */
+.btn-group .btn {
+    padding: 10px 20px;
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+/* Na tabela do checklist, garante que o texto longo não esmague os botões */
+@media (max-width: 576px) {
+    .table td {
+        padding: 12px 8px;
+    }
+    
+    /* Faz cada item do checklist virar um bloco no celular para não esmagar a tela */
+    .checklist-row {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        border-bottom: 1px solid #dee2e6;
+        padding: 15px 0;
+    }
+    
+    .checklist-item-text {
+        font-weight: 500;
+        margin-bottom: 10px;
+        width: 100%;
+    }
+    
+    .checklist-item-actions {
+        width: 100%;
+    }
+    
+    .checklist-item-actions .btn-group {
+        width: 100%;
+    }
+    
+    .checklist-item-actions .btn {
+        flex: 1;
+    }
+}
+
+/* Garante que o container não fique colado nas bordas do celular */
+.container {
+    padding-left: 15px;
+    padding-right: 15px;
+}

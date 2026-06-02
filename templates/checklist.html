@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checklist Preventivo de Segurança</title>
+    <!-- Importação Correta do Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <!-- Ícones do Bootstrap para melhorar o visual dos botões -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <!-- Nosso CSS customizado -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="bg-light">
+    <div class="container my-4">
+        <div class="card shadow-sm border-0">
+            <div class="card-header bg-dark text-white text-center py-3">
+                <h4 class="mb-1 fw-bold"><i class="bi bi-shield-check"></i> Checklist Obrigatório</h4>
+                <p class="mb-0 small text-white-50">Inspecione o veículo antes de iniciar o trecho</p>
+            </div>
+            <div class="card-body p-3 p-sm-4">
+                <form method="POST">
+                    
+                    <!-- VERSÃO DESKTOP E TABLET (Tabela visível apenas de telas pequenas para cima) -->
+                    <div class="d-none d-sm-block">
+                        <table class="table table-hover align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Item de Inspeção</th>
+                                    <th class="text-center" style="width: 220px;">Status de Conformidade</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in itens %}
+                                <tr>
+                                    <td class="fw-medium text-dark">{{ dicionario[item] }}</td>
+                                    <td class="text-center">
+                                        <div class="btn-group" role="group">
+                                            <input type="radio" class="btn-check" name="item_{{ item }}" id="dk_ok_{{ item }}" value="OK" checked autocomplete="off">
+                                            <label class="btn btn-outline-success px-3" for="dk_ok_{{ item }}">
+                                                <i class="bi bi-check-circle-fill"></i> OK
+                                            </label>
+
+                                            <input type="radio" class="btn-check" name="item_{{ item }}" id="dk_nok_{{ item }}" value="Não OK" autocomplete="off">
+                                            <label class="btn btn-outline-danger px-3" for="dk_nok_{{ item }}">
+                                                <i class="bi bi-exclamation-triangle-fill"></i> Avaria
+                                            </label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- VERSÃO MOBILE (Aparece em formato de cartões empilhados apenas no celular) -->
+                    <div class="d-block d-sm-none">
+                        {% for item in itens %}
+                        <div class="p-3 mb-3 bg-white rounded border shadow-sm">
+                            <div class="text-dark fw-bold mb-3 fs-6">{{ dicionario[item] }}</div>
+                            <div class="btn-group w-100" role="group">
+                                <input type="radio" class="btn-check" name="item_{{ item }}" id="mb_ok_{{ item }}" value="OK" checked autocomplete="off">
+                                <label class="btn btn-outline-success py-2 fw-medium w-50" for="mb_ok_{{ item }}">
+                                    <i class="bi bi-check-circle-fill"></i> OK
+                                </label>
+
+                                <input type="radio" class="btn-check" name="item_{{ item }}" id="mb_nok_{{ item }}" value="Não OK" autocomplete="off">
+                                <label class="btn btn-outline-danger py-2 fw-medium w-50" for="mb_nok_{{ item }}">
+                                    <i class="bi bi-exclamation-triangle-fill"></i> Avaria
+                                </label>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                    <!-- CAIXA DE TEXTO PARA OBSERVAÇÕES -->
+                    <div class="mt-4 mb-4">
+                        <label class="form-label fw-bold text-dark"><i class="bi bi-chat-left-text"></i> Alguma Observação / Ressalva Técnica?</label>
+                        <textarea name="observacoes" rows="3" class="form-control form-control-lg text-secondary" placeholder="Se houver avarias ou detalhes a relatar sobre o veículo, digite aqui..."></textarea>
+                    </div>
+
+                    <!-- BOTÃO DE SUBMISSÃO -->
+                    <button type="submit" class="btn btn-success btn-lg w-100 py-3 shadow-sm fw-bold">
+                        <i class="bi bi-play-fill"></i> Confirmar e Liberar Viagem
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
